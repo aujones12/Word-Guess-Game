@@ -4,9 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Word Guess Game!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/javascript/game.js">
+
 </head>
-<body>
-    
-</body>
+
+    <body>
+        <a href = "./index.html" class="badge badge-secondary">Play Again!</a>
+        <script>
+
+            //making an array of words to pick from
+            var words = ["blue","green","yellow","red","orange"];
+            //picking a word at random
+            var word = words[Math.floor(Math.random() * words.length)];
+            //replacing the random word with _ chars 
+            var answerArray = [];
+            for (var i = 0; i < word.length; i++) {
+                answerArray[i] = "_";
+            }
+            //checking to see if remaining letters is more that 0
+            var remainingLetters = word.length;
+
+            while (remainingLetters > 0) {
+                alert(answerArray.join(" "));
+            //promting the user for input
+            var guess = prompt("Guess a letter, or click Cancel to stop playing.\nHINT: Colors.");
+            //if no input--repeat prompt
+                if (guess === null) {
+                break;
+            // if inout > 1 alert 
+            } else if (guess.length !== 1) {
+                alert("Please enter a single letter.");
+            //checks to see if the letter guess is at any index point in the word string
+            } else {
+                for (var j = 0; j < word.length; j++) {
+            //if true -- replaces _ with its respective letter and reduces remaining letters
+                    if (word[j] === guess) {
+                        answerArray[j] = guess;
+                        remainingLetters--;
+                        }
+                    }
+                }
+            }
+            //shows the random word and resets 
+            alert(answerArray.join(" "));
+            alert("Good job! The answer was " + word);
+        </script>
+    </body>
 </html>
